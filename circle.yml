@@ -9,8 +9,9 @@ machine:
 
 dependencies:
   pre:
-    - sudo pip install --upgrade pip
-    - sudo pip install docker-compose
+    - pip install --upgrade pip
+    - pip install docker-compose
+    - pyenv rehash
 
 test:
   override:
