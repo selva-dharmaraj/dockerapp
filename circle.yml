@@ -18,6 +18,12 @@ jobs:
           name: Build service
           command: make
 
+dependencies:
+  pre:
+    - pip install --upgrade pip
+    - pip install docker-compose
+    - pyenv rehash
+
 test:
   override:
     - docker-compose up -d
