@@ -1,21 +1,22 @@
 machine:
   pre:
     - curl -sSL https://s3.amazonaws.com/circle-downloads/install-circleci-docker.sh | bash -s -- 1.13.0
-    - run:
-        name: Install Docker Compose
-        command: |
-          set -x
-          curl -L https://github.com/docker/compose/releases/download/1.11.2/docker-compose-`uname -s`-`uname -m` > /usr/local/bin/docker-compose
-          chmod +x /usr/local/bin/docker-compose
-
   services:
     - docker
 
-dependencies:
-  pre:
-    - pip install --upgrade pip
-    - pip install docker-compose
-    - pyenv rehash
+jobs:
+  build:
+    steps:
+      # This should go into custom primary image, here's only for the sake of explanation
+      - run:
+          name: Install Docker Compose
+          command: |
+            set -x
+            curl -L https://github.com/docker/compose/releases/download/1.11.2/docker-compose-`uname -s`-`uname -m` > /usr/local/bin/docker-compose
+            chmod +x /usr/local/bin/docker-compose
+      - run:
+          name: Build service
+          command: make
 
 test:
   override:
