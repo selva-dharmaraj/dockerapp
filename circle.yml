@@ -31,7 +31,8 @@ test:
 
 deployment:
   hub:
-    branch: [branch-v0.6-test,master]
+#    branch: [branch-v0.6-test,master]
+    branch: /.*/
     commands:
       - docker login -e $DOCKER_HUB_EMAIL -u $DOCKER_HUB_USER_ID -p $DOCKER_HUB_PWD
       - docker tag dockerapp_dockerapp $DOCKER_HUB_USER_ID/dockerapp:$CIRCLE_SHA1
